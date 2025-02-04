@@ -55,21 +55,26 @@ const testimonial_data = [
   }
 ];
 
+const animation_duration = 70 // Increase this value to slow down the animation
+
 document.addEventListener('DOMContentLoaded', () => {
   let testimonialLists = document.querySelectorAll('.testimonial-list');
 
+
+  const testimonialsHTML = testimonial_data.map(testimonial => `
+  <li class="testimonial-card">
+    <div class="testimonial-header">
+      <h2>${testimonial.name}</h2>
+      <div class="stars">
+        ${'<img src="/star.svg" alt="star">'.repeat(testimonial.rating)}
+      </div>
+    </div>
+    <p>"${testimonial.message}"</p>
+  </li>
+`).join('');
+
   testimonialLists.forEach(testimonials => {
-    testimonials.innerHTML = testimonial_data.map(testimonial => `
-      <li class="testimonial-card">
-        <div class="testimonial-header">
-          <h2>${testimonial.name}</h2>
-          <div class="stars">
-            ${'<img src="/star.svg" alt="star">'.repeat(testimonial.rating)}
-          </div>
-        </div>
-        <p>"${testimonial.message}"</p>
-      </li>
-    `).join('');
+    testimonials.innerHTML = testimonialsHTML.repeat(3);
   });
 
 
@@ -78,32 +83,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const row2 = document.querySelector('.testimonial-list-2');
 
   const anim1 = gsap.to(row1, {
-      x: '-50%',
-      duration: 25,
-      repeat: -1,
-      ease: 'linear'
+    x: '-50%',
+    duration: animation_duration,
+    repeat: -1,
+    ease: 'linear'
   });
 
   const anim2 = gsap.to(row2, {
-      x: '50%',
-      duration: 25,
-      repeat: -1,
-      ease: 'linear'
+    x: '50%',
+    duration: animation_duration,
+    repeat: -1,
+    ease: 'linear'
   });
 
   row1.addEventListener('mouseenter', function () {
-      anim1.timeScale(0.5);
+    anim1.timeScale(0.3);
   });
 
   row1.addEventListener('mouseleave', function () {
-      anim1.timeScale(1);
+    anim1.timeScale(1);
   });
 
   row2.addEventListener('mouseenter', function () {
-      anim2.timeScale(0.5);
+    anim2.timeScale(0.3);
   });
 
   row2.addEventListener('mouseleave', function () {
-      anim2.timeScale(1);
+    anim2.timeScale(1);
   });
 });

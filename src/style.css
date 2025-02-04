@@ -2,12 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 
-
-:root {
-  --main-text-color: #FFFFFF;
-  --secondary-text-color: #E6FF00;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -41,27 +35,6 @@ body {
   align-items: center;
   width: 100%;
   gap: 3rem;
-}
-
-.testimonial-headings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.testimonial-headings p {
-  font-size: 1rem;
-  color: var(--secondary-text-color);
-  font-family: 'Inter', sans-serif;
-}
-
-.testimonial-headings h2 {
-  font-size: 4rem;
-  color: var(--main-text-color);
-  letter-spacing: 1.5px;
-  font-weight: 400;
-  font-family: 'Anton', sans-serif;
 }
 
 
