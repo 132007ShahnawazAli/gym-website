@@ -60,7 +60,6 @@ const animation_duration = 70 // Increase this value to slow down the animation
 document.addEventListener('DOMContentLoaded', () => {
   let testimonialLists = document.querySelectorAll('.testimonial-list');
 
-
   const testimonialsHTML = testimonial_data.map(testimonial => `
   <li class="testimonial-card">
     <div class="testimonial-header">
@@ -111,4 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
   row2.addEventListener('mouseleave', function () {
     anim2.timeScale(1);
   });
+
+
+
+  
 });
