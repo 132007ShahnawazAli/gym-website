@@ -1,22 +1,25 @@
 import './style.css'
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+
+gsap.registerPlugin(ScrollTrigger)
 
 
 const testimonial_data = [
   {
     name: 'Alice Johnson',
     rating: 4,
-    message: "Peak Fitness transformed my workout routine! The trainers are knowledgeable and really care about your progress. They take the time to personalize each session, and I’ve seen great improvements in my fitness. Highly recommend if you want to reach your goals!"
+    message: "Peak Fitness transformed my workout routine! The trainers are knowledgeable and really care about your progress. They take the time to personalize each session, and I've seen great improvements in my fitness."
   },
   {
     name: 'Michael Smith',
     rating: 5,
-    message: "I have never felt stronger! The personalized training sessions push me beyond my limits in the best way. The trainers are exceptional, and the atmosphere is motivating. I highly recommend this gym to anyone serious about getting fit!"
+    message: "I have never felt stronger! The personalized training sessions push me beyond my limits in the best way. The trainers are exceptional, and the atmosphere is motivating."
   },
   {
     name: 'Sophia Williams',
     rating: 4,
-    message: "The atmosphere at Peak Fitness is amazing, and the trainers are so supportive. The group sessions keep me motivated every day, and I feel like I am improving with each workout. It is a great place to work on your fitness goals."
+    message: "The atmosphere at Peak Fitness is amazing, and the trainers are so supportive. The group sessions keep me motivated every day, and I feel like I am improving with each workout."
   },
   {
     name: 'David Brown',
@@ -111,7 +114,76 @@ document.addEventListener('DOMContentLoaded', () => {
     anim2.timeScale(1);
   });
 
+  const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
+  if (mediaQuery.matches) {
+    const service_cards = document.querySelectorAll('.service-cards');
+    const service_card = document.querySelectorAll('.service-card');
+    const service_content = document.querySelectorAll('.service-content');
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.service-section',
+        height: 'auto',
+        pin: true,
+        start: 'top 5%',
+        end: 'bottom 70%',
+        scrub: 1,
+        ease: 'linear',
+        onUpdate: () => {
+          const serviceSection = document.querySelector('.service-section');
+          serviceSection.style.height = `${service_cards.scrollHeight}px`;
+        }
+      }
+    });
 
-  
+    tl.to(service_content, {
+      height: 0,
+      opacity: 0,
+      stagger: {
+        each: 0.5,
+        from: 0,
+        grid: "auto",
+        ease: "power1.inOut",
+        onComplete: function () {
+          const lastCard = service_card[service_card.length - 1];
+          gsap.set(lastCard, {
+            height: 'auto',
+            opacity: '1',
+          });
+        }
+      },
+      onUpdate: () => {
+        const serviceSection = document.querySelector('.service-section');
+        serviceSection.style.height = `${service_cards.scrollHeight}px`;
+      }
+    });
+
+    tl.to(service_card, {
+      marginBottom: 0,
+      borderBottom: 'none',
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
+      stagger: {
+        each: 0.5,
+        from: 0,
+        grid: "auto",
+        ease: "power1.inOut",
+        onComplete: function () {
+          const lastCard = service_card[service_card.length - 1];
+          gsap.set(lastCard, {
+            marginBottom: '',
+            borderBottom: '',
+            borderBottomLeftRadius: '',
+            borderBottomRightRadius: '',
+            height: 'auto',
+            opacity: 1,
+          });
+        }
+      },
+      onUpdate: () => {
+        const serviceSection = document.querySelector('.service-section');
+        serviceSection.style.height = `${service_cards.scrollHeight}px`;
+      }
+    }, '<');
+  }
 });
