@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tl.to(service_content, {
       height: 0,
       opacity: 0,
+      marginTop: 0,
       stagger: {
         each: 0.5,
         from: 0,
